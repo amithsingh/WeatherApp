@@ -28,8 +28,9 @@ class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() 
             try {
                 val result = repository.fetchWeatherFromApi(city, apiKey)
                 if (result.isFailure) {
-                    _errorMessage.value =
-                        "Error occurred while fetching the weather details. Please try with other place."
+                    _errorMessage.value = result.exceptionOrNull()?.localizedMessage ?: "Unknown error occurred"
+//                    _errorMessage.value =
+//                        "Error occurred while fetching the weather details. Please try with other place."
                 }
             } catch (e: Exception) {
                 _errorMessage.value = e.message
