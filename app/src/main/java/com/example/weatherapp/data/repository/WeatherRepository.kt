@@ -28,7 +28,7 @@ class WeatherRepository(private val weatherDao: WeatherDao, private val api: Wea
             weatherDao.insert(weatherEntity)
             Result.success(weatherEntity)
         } catch (e: HttpException) {
-            Result.failure(IOException("Error occurred while fetching the weather details. Please try with other place."))
+            Result.failure(IOException("Enter invalid city name. Please try with other city."))
         } catch (e: UnknownHostException) {
             Result.failure(IOException("Network error. Please check your internet connection."))
         } catch (e: SocketTimeoutException) {
